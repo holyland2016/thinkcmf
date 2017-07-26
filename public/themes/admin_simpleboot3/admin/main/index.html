@@ -1,22 +1,22 @@
 <php>function _get_system_widget($name){</php>
 <switch name="name">
     <case value="CmfHub">
-        <div class="panel panel-default">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">交流方式</h3>
             </div>
             <div class="panel-body home-info">
                 <ul class="list-unstyled">
-                    <li><em>官网</em> <span><a href="http://www.thinkcmf.com" target="_blank">www.thinkcmf.com</a></span>
+                    <li><em>官网</em> <span><a href="http://www.holylander.cn" target="_blank">www.holylander.cn</a></span>
                     </li>
-                    <li><em>QQ 群</em> <span>100828313,316669417</span></li>
-                    <li><em>联系邮箱</em> <span>thinkcmf@126.com</span></li>
+                    <li><em>QQ 群</em> <span>978573910</span></li>
+                    <li><em>联系邮箱</em> <span>978573910@qq.com</span></li>
                 </ul>
             </div>
         </div>
     </case>
     <case value="MainContributors">
-        <div class="panel panel-default">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">主要贡献者</h3>
             </div>
@@ -36,7 +36,7 @@
         </div>
     </case>
     <case value="Contributors">
-        <div class="panel panel-default">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">贡献者</h3>
             </div>
@@ -101,7 +101,7 @@
 </head>
 <body>
 <div class="wrap">
-    <empty name="has_smtp_setting">
+    <!--/*<empty name="has_smtp_setting">
         <div class="grid-item col-md-12">
             <div class="alert alert-danger alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -112,11 +112,12 @@
                    onclick="parent.openapp('{:url('Mailer/index')}','admin_mailer_index','邮箱配置');">现在设置</a>
             </div>
         </div>
-    </empty>
+    </empty>*/
+    /*把上面这一段注释掉，主要是因为现在还没需要*/-->
 
-    <div class="grid-item col-md-12" id="thinkcmf-notices-grid" style="display:none;">
+    <div class="grid-item" id="thinkcmf-notices-grid" style="display:none;">
         <div class="dashboard-box">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">{:lang('SYSTEM_NOTIFICATIONS')}</h3>
                 </div>
@@ -259,8 +260,8 @@
         });
     }
 
-    //获取官方通知
-    $.getJSON("http://www.thinkcmf.com/service/sms_jsonp.php?lang={$lang_set}&v={$thinkcmf_version}&callback=?",
+    //获取官方通知   注释这一段主要是以为上面有官方网站的信息
+    /*$.getJSON("http://www.thinkcmf.com/service/sms_jsonp.php?lang={$lang_set}&v={$thinkcmf_version}&callback=?",
         function (data) {
             var tpl      = '<li><em class="title"></em><span class="content"></span></li>';
             var $notices = $("#thinkcmf-notices");
@@ -277,7 +278,7 @@
                 $notices.append("<li>^_^,{:lang('NO_NOTICE')}~~</li>");
             }
 
-        });
+        });*/
 </script>
 <hook name="admin_before_body_end"/>
 </body>

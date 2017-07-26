@@ -54,11 +54,13 @@ class SystemInfoPlugin extends Plugin
             lang('PHP_RUN_MODE')          => php_sapi_name(),
             lang('PHP_VERSION')           => phpversion(),
             lang('MYSQL_VERSION')         => $mysql,
+            '服务器域名/IP地址'      => $_SERVER['SERVER_NAME'].' [ '.gethostbyname($_SERVER['SERVER_NAME']).' ]',
             'ThinkPHP'                    => THINK_VERSION,
             'ThinkCMF'                    => "{$version} <a href=\"http://www.thinkcmf.com\" target=\"_blank\">访问官网</a>",
             lang('UPLOAD_MAX_FILESIZE')   => ini_get('upload_max_filesize'),
             lang('MAX_EXECUTION_TIME')    => ini_get('max_execution_time') . "s",
             //TODO 增加更多信息
+            '北京时间'              =>gmdate("Y年n月j日 H:i:s",time()+8*3600),
             lang('DISK_FREE_SPACE')       => round((@disk_free_space(".") / (1024 * 1024)), 2) . 'M',
         ];
         $this->assign('server_info', $info);
