@@ -75,7 +75,7 @@ parse;
 <?php
      if(isset(\$theme_widgets[{$name}]) && \$theme_widgets[{$name}]['display']){
         \$widget=\$theme_widgets[{$name}];
-     
+
  ?>
 {$content}
 <?php
@@ -118,7 +118,7 @@ function {$parseNavigationFuncName}(\$menus,\$level=1){
     <foreach name="menus" item="menu">
     {$content}
     </foreach>
-<?php 
+<?php
 }
 ?>
 
@@ -212,7 +212,7 @@ function {$parseSubNavigationFuncName}(\$menus,\$level=1){
     <foreach name="menus" item="menu">
     {$content}
     </foreach>
-<?php 
+<?php
 }
 ?>
 
@@ -306,7 +306,7 @@ parse;
 <?php
      \$__SLIDE_ITEMS__ = \app\admin\service\ApiService::slides({$id});
 ?>
-<volist name="__SLIDE_ITEMS__" id="{$item}">
+<volist name="__SLIDE_ITEMS__" id="{$item}" key="k">
 {$content}
 </volist>
 parse;

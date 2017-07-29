@@ -1,0 +1,41 @@
+
+<!--采用container-fluid，使得整个页尾的宽度为100%，并设置它的背景色-->
+<footer class="container-fluid foot-wrap">
+  <!--采用container，使得页尾内容居中 -->
+    <hook name="footer_start"/>
+      <div class="container">
+          <div class="row">
+              <div class="row-content col-md-12">
+                  <h3>友情链接</h3>
+                  <ul>
+                    <links>
+                        <a href="{$vo.url|default=''}" target="{$vo.target|default=''}">{$vo.name|default=''}</a>&nbsp;
+                    </links>
+                  </ul>
+              </div>
+            </div><!--/.row -->
+      </div><!--/.container-->
+      <p align="center" style="margin-top: 20px;color:#878B91;">
+          Based on
+          <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>.
+          Icons from
+          <a href="http://fortawesome.github.com/Font-Awesome/" target="_blank">Font Awesome</a>
+          <br>
+          备案号:
+          <notempty name="site_info.site_icp">
+              <a href="http://www.miitbeian.gov.cn/" target="_blank">{$site_info.site_icp}</a>
+              <else/>
+              请在后台设置"网站信息"设置"备案信息"
+          </notempty>
+
+
+      </p>
+      <p align="center" style="margin-top: 20px;color:#878B91;">
+          Copyright &copy;2015 {$theme_vars.company_name|default='ThinkCMF'}
+      </p>
+
+</footer>
+
+<div id="backtotop">
+    <i class="fa fa-arrow-circle-up"></i>
+</div>

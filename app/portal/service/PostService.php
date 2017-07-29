@@ -140,6 +140,7 @@ class PostService
 
             $article = $portalPostModel->alias('post')->field('post.*')
                 ->where($where)
+                ->order('id', 'DESC')
                 ->find();
 
         } else {
@@ -158,6 +159,7 @@ class PostService
             $article = $portalPostModel->alias('post')->field('post.*')
                 ->join($join)
                 ->where($where)
+                ->order('id', 'DESC')
                 ->find();
         }
 

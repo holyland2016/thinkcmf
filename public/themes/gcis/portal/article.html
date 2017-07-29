@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$article.post_title}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <style>
+        #context img {
+            height: auto !important;
+            max-width: 100%;
+        }
+
+        #context {
+            word-wrap: break-word;
+        }
+    </style>
+    <hook name="before_head_end"/>
+</head>
+<body>
+<include file="public@nav"/>
+<div class="container article">
+        <div class="col-md-3">
+          <h1>最近文章</h1>
+          <hr></hr>
+          <hr></hr>
+           <h4><a href="">数学与计算科学学院举办党团员“一对一帮扶”活动启动仪式</a></h4>
+           <h4><a href="">数学与计算科学学院举办党团员“一对一帮扶”活动启动仪式</a></h4>
+           <h4><a href="">数学与计算科学学院举办党团员“一对一帮扶”活动启动仪式</a></h4>
+           <h4><a href="">数学与计算科学学院举办党团员“一对一帮扶”活动启动仪式</a></h4>
+          <p class="readmore"><a href="#">更多新闻 &raquo;</a></p>
+          <h1>实验室概况</h1>
+          <hr></hr>
+          <hr></hr>
+          <img class="img-responsive" src="images/demo/240x150.jpg" alt="First slide">
+           <table class="table">
+            <tbody>
+              <tr>
+                <td><a class="btn btn-large" type="button" href="#">实验室简介</a></td>
+                <td><a class="btn btn-large" type="button" href="#">组织架构</a></td>
+              <tr>
+              <tr>
+                <td><a class="btn btn-large" type="button" href="#">现任领导</a></td>
+                <td><a class="btn btn-large" type="button" href="#">学术委员会</a></td>
+              <tr>
+              <tr>
+                <td><a class="btn btn-large" type="button" href="#">研究方向</a></td>
+                <td><a class="btn btn-large" type="button" href="#">实验室架构</a></td>
+              <tr>
+            </tbody>
+          </table>
+          <h1>联系我们</h1>
+          <hr></hr>
+          <hr></hr>
+          <h3>实验室负责人：xxx</h3>
+          <h3>地址：桂林电子科技大学</h3>
+        </div>
+        <div class="col-md-9">
+          <if condition="$article['post_status']">
+          <h1>{$article.post_title}</h1>
+
+          <hr></hr>
+          <hr></hr>
+          <h5>
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>{:date('d/m/Y H:i',$article.published_time)}&nbsp;&nbsp;
+            <span>&nbsp;&nbsp;作者：{$article.user.user_nickname}</span>
+            <span>&nbsp;&nbsp;分类：{$category.name}</span>
+          </h5>
+          <div class="context">
+            {$article.post_content}
+          </div>
+          <div class="col-md-6 eye">
+            <span class="glyphicon glyphicon-eye-open" aria-hidden="true">&nbsp;{$article.post_hits}</span>
+          </div>
+          <div class="col-md-6 thumbs">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">&nbsp;{$article.post_like}</span>
+          </div>
+          <ol class="breadcrumb">
+            <li><a href="__ROOT__/">首页</a></li>
+            <li class="active">{$category.name}</li>
+          </ol>
+          <nav aria-label="...">
+          <ul class="pager">
+            <if condition="!empty($prev_article)">
+              <li class="previous"><a href="{:cmf_url('article/index',array('id'=>$prev_article['id'],'cid'=>$category['id']))}"><span aria-hidden="true">&larr;</span> 上一篇</a></li>
+            <else />
+              <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 上一篇</a></li>
+            </if>
+            <if condition="!empty($next_article)">
+              <li class="next"><a href="{:cmf_url('article/index',array('id'=>$next_article['id'],'cid'=>$category['id']))}">下一篇 <span aria-hidden="true">&rarr;</span></a></li>
+            <else />
+              <li class="next"><a href="#">下一篇 <span aria-hidden="true">&rarr;</span></a></li>
+            </if>
+          </ul>
+        </nav>
+         <div class="">
+           <if condition="!empty($prev_article)">
+             <h3>上一篇：<a href="{:cmf_url('article/index',array('id'=>$prev_article['id'],'cid'=>$category['id']))}">{$prev_article['post_title']}</a></h3>
+           <else />
+            <h3>上一篇：没有了</h3>
+           </if>
+           <if condition="!empty($next_article)">
+             <h3>下一篇：<a href="{:cmf_url('article/index',array('id'=>$next_article['id'],'cid'=>$category['id']))}">{$next_article['post_title']}</a></h3>
+           <else />
+            <h3>上一篇：没有了</h3>
+           </if>
+         </div>
+        </div>
+
+
+    	</div>
+
+<include file="public@footer"/>
+<include file="public@scripts"/>
+<script>
+		$(function () {
+    $(".dropdown").mouseover(function () {
+        $(this).addClass("open");
+    });
+
+    $(".dropdown").mouseleave(function(){
+        $(this).removeClass("open");
+    })
+})
+	</script>
+<hook name="before_body_end"/>
+</body>
+</html>
