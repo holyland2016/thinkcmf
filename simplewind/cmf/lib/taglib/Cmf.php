@@ -115,7 +115,7 @@ parse;
 function {$parseNavigationFuncName}(\$menus,\$level=1){
 \$_parse_navigation_func_name = '{$parseNavigationFuncName}';
 ?>
-    <foreach name="menus" item="menu">
+    <foreach name="menus" item="menu" key="k">
     {$content}
     </foreach>
 <?php
