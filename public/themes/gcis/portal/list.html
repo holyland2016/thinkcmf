@@ -14,42 +14,44 @@
     <div class="container category">
       <div class="col-md-3">
         <widget name="last_articles">
-          <h1>{$widget.title}</h1>
-          <hr></hr>
-          <hr></hr>
-          <div class="posts">
-            <portal:articles limit="5" order="post.published_time DESC"
-                            page="5"
-                            categoryIds="$widget.vars.last_articles_category_id">
-              <h4><a href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}">{$vo.post_title}</a></h4>
-            </portal:articles>
-         </div>
-        </widget>
-         <h1>实验室概况</h1>
-         <hr></hr>
-         <hr></hr>
-         <img class="img-responsive" src="images/demo/240x150.jpg" alt="First slide">
-          <table class="table">
+        <h1>{$widget.title}</h1>
+        <hr></hr>
+        <hr></hr>
+        <?php  $widget["vars"]["last_articles_category_id"] = empty($widget["vars"]["last_articles_category_id"])?9:$widget["vars"]["last_articles_category_id"];?>
+        <portal:articles limit="5" order="post.post_hits DESC"
+                         categoryIds="$widget.vars.last_articles_category_id">
+          <h4><a title="{$vo.post_title}"
+             href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.category_id))}">{$vo.post_title}</a></h4>
+        </portal:articles>
+       </widget>
+        <h1>实验室概况</h1>
+        <hr></hr>
+        <hr></hr>
+        <php>
+            $slide_id=empty($theme_vars['top_slide'])?2:$theme_vars['top_slide'];
+        </php>
+        <slides id="$slide_id">
+        <img class="img-responsive" src="{:cmf_get_image_url($vo.image)}" alt="First slide">
+        </slides>
+         <table class="table">
            <tbody>
-             <tr>
-               <td><a class="btn btn-large" type="button" href="#">实验室简介</a></td>
-               <td><a class="btn btn-large" type="button" href="#">组织架构</a></td>
-             <tr>
-             <tr>
-               <td><a class="btn btn-large" type="button" href="#">现任领导</a></td>
-               <td><a class="btn btn-large" type="button" href="#">学术委员会</a></td>
-             <tr>
-             <tr>
-               <td><a class="btn btn-large" type="button" href="#">研究方向</a></td>
-               <td><a class="btn btn-large" type="button" href="#">实验室架构</a></td>
-             <tr>
+               <navigation nav-id="3" root="tr" id="foot-navigation" class="table" style="margin-top:10px;background-color:#D1E3E6;" max-level="2">
+                   <navigationMenu root="td" class="">
+                       <a class="btn btn-large" type="button" href="{$menu.href|default=''}" target="{$menu.target|default=''}">
+                           {$menu.name|default=''}
+                       </a>
+                   </navigationMenu>
+                   <if condition="($k%2 == 1) "> </tr>
+                   </tr>
+                   </if>
+               </navigation>
            </tbody>
          </table>
-         <h1>联系我们</h1>
+        <h1>联系我们</h1>
         <hr></hr>
         <hr></hr>
-        <h3>实验室负责人：xxx</h3>
-        <h3>地址：桂林电子科技大学</h3>
+        <h3>实验室负责人：{$theme_vars.company_man|default=''}</h3>
+        <h3>地址：{$theme_vars.address_cn|default=''}</h3>
       </div>
       <div class="col-md-9">
         <php>$demo_time=2;</php>

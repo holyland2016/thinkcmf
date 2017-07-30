@@ -13,95 +13,105 @@
     </style>
     <hook name="before_head_end"/>
 </head>
-<body class="body-white">
+<body>
 <include file="public@nav"/>
-<div class="container tc-main">
-    <div class="row">
-        <div class="col-md-9">
-            <div class="tc-box article-box">
-                <h2>{$page.post_title|default=''}</h2>
-                <hr>
-                <div id="article_content">
-                    {$page.post_content|default=''}
-                </div>
-
-                <php>
-                    $comment_hook_param=[
-                    'post_id'=>$page['id'],
-                    'post_table'=>'portal_post',
-                    'post_title'=>$page['post_title']
-                    ];
-                </php>
-
-                <hook name="comment" param="comment_hook_param"/>
-            </div>
-
-        </div>
+<div class="container article">
         <div class="col-md-3">
-            <widget name="hottest_articles">
-                <div class="tc-box">
-                    <div class="headtitle">
-                        <h2>{$widget.title}</h2>
-                    </div>
-                    <div class="ranking">
-                        <php>
-                            $hot_articles=[];
-                        </php>
-                        <ul class="list-unstyled">
-                            <portal:articles limit="5" order="post.post_hits DESC"
-                                             categoryIds="$widget.vars.hottest_articles_category_id">
-                                <php>$top=$key<3?"top3":"";</php>
-                                <li class="{$top}">
-                                    <i>{$key+1}</i>
-                                    <a title="{$vo.post_title}"
-                                       href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}">
-                                        {$vo.post_title}
-                                    </a>
-                                </li>
-                            </portal:articles>
-                        </ul>
-                    </div>
-                </div>
-            </widget>
+          <widget name="last_articles">
+          <h1>{$widget.title}</h1>
+          <hr></hr>
+          <hr></hr>
+          <?php  $widget["vars"]["last_articles_category_id"] = empty($widget["vars"]["last_articles_category_id"])?9:$widget["vars"]["last_articles_category_id"];?>
+          <portal:articles limit="5" order="post.post_hits DESC"
+                           categoryIds="$widget.vars.last_articles_category_id">
+            <h4><a title="{$vo.post_title}"
+               href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.category_id))}">{$vo.post_title}</a></h4>
+          </portal:articles>
+         </widget>
+          <h1>实验室概况</h1>
+          <hr></hr>
+          <hr></hr>
+          <php>
+              $slide_id=empty($theme_vars['top_slide'])?2:$theme_vars['top_slide'];
+          </php>
+          <slides id="$slide_id">
+          <img class="img-responsive" src="{:cmf_get_image_url($vo.image)}" alt="First slide">
+          </slides>
+           <table class="table">
+             <tbody>
+                 <navigation nav-id="3" root="tr" id="foot-navigation" class="table" style="margin-top:10px;background-color:#D1E3E6;" max-level="2">
+                     <navigationMenu root="td" class="">
+                         <a class="btn btn-large" type="button" href="{$menu.href|default=''}" target="{$menu.target|default=''}">
+                             {$menu.name|default=''}
+                         </a>
+                     </navigationMenu>
+                     <if condition="($k%2 == 1) "> </tr>
+                     </tr>
+                     </if>
+                 </navigation>
+             </tbody>
+           </table>
+          <h1>联系我们</h1>
+          <hr></hr>
+          <hr></hr>
+          <h3>实验室负责人：{$theme_vars.company_man|default=''}</h3>
+          <h3>地址：{$theme_vars.address_cn|default=''}</h3>
+        </div>
+        <div class="col-md-9">
+          <if condition="$article['post_status']">
+          <h1>{$page.post_title|default=''}</h1>
 
-
-            <widget name="last_articles">
-                <div class="tc-box">
-                    <div class="headtitle">
-                        <h2>{$widget.title}</h2>
-                    </div>
-                    <div class="posts">
-                        <portal:articles limit="5" order="post.published_time DESC"
-                                         categoryIds="$widget.vars.last_articles_category_id">
-                            <dl class="dl-horizontal">
-                                <dt>
-                                    <a class="img-wraper"
-                                       href="{:cmf_url('portal/Article/index',array('id'=>$vo.id))}">
-                                        <if condition="empty($vo.more.thumbnail)">
-                                            <img src="__TMPL__/public/assets/images/default_tupian4.png"
-                                                 class="img-responsive" alt="{$vo.post_title}"/>
-                                            <else/>
-                                            <img src="{:cmf_get_image_url($vo.more.thumbnail)}"
-                                                 class="img-responsive" alt="{$vo.post_title}"/>
-                                        </if>
-                                    </a>
-                                </dt>
-                                <dd>
-                                    <a href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}">{$vo.post_title}</a>
-                                </dd>
-                            </dl>
-                        </portal:articles>
-                    </div>
-                </div>
-            </widget>
+          <hr></hr>
+          <hr></hr>
+          <h5>
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>{:date('d/m/Y H:i',$page.published_time)}&nbsp;&nbsp;
+            <span>&nbsp;&nbsp;作者：{$page.user.user_nickname}</span>
+          </h5>
+          <div class="context">
+            {$page.post_content|default=''}
+          </div>
+          <div class="col-md-6 eye">
+            <span class="glyphicon glyphicon-eye-open" aria-hidden="true">&nbsp;{$page.post_hits}</span>
+          </div>
+          <div class="col-md-6 thumbs">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">&nbsp;{$page.post_like}</span>
+          </div>
+          <ol class="breadcrumb">
+            <li><a href="__ROOT__/">首页</a></li>
+            <li class="active">{$page.post_title|default=''}</li>
+          </ol>
+          <nav aria-label="...">
+          <ul class="pager">
+            <if condition="!empty($prev_article)">
+              <li class="previous"><a href="{:cmf_url('article/index',array('id'=>$prev_article['id'],'cid'=>$category['id']))}"><span aria-hidden="true">&larr;</span> 上一篇</a></li>
+            <else />
+              <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 上一篇</a></li>
+            </if>
+            <if condition="!empty($next_article)">
+              <li class="next"><a href="{:cmf_url('article/index',array('id'=>$next_article['id'],'cid'=>$category['id']))}">下一篇 <span aria-hidden="true">&rarr;</span></a></li>
+            <else />
+              <li class="next"><a href="#">下一篇 <span aria-hidden="true">&rarr;</span></a></li>
+            </if>
+          </ul>
+        </nav>
+         <div class="">
+           <if condition="!empty($prev_article)">
+             <h3>上一篇：<a href="{:cmf_url('article/index',array('id'=>$prev_article['id'],'cid'=>$category['id']))}">{$prev_article['post_title']}</a></h3>
+           <else />
+            <h3>上一篇：没有了</h3>
+           </if>
+           <if condition="!empty($next_article)">
+             <h3>下一篇：<a href="{:cmf_url('article/index',array('id'=>$next_article['id'],'cid'=>$category['id']))}">{$next_article['post_title']}</a></h3>
+           <else />
+            <h3>上一篇：没有了</h3>
+           </if>
+         </div>
         </div>
 
 
-    </div>
+    	</div>
 
-    <include file="public@footer"/>
-</div>
-
+<include file="public@footer"/>
 <include file="public@scripts"/>
 <script>
 		$(function () {

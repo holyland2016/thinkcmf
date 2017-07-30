@@ -22,9 +22,18 @@
                     "require": true
                 }
             },
+            "company_man": {
+                "title": "实验室负责人",
+                "value": "xxx",
+                "type": "text",
+                "tip": "",
+                "rule": {
+                    "require": true
+                }
+            },
             "address_cn": {
                 "title": "公司地址",
-                "value": "上海市徐汇区斜土路0001号",
+                "value": "桂林电子科技大学",
                 "type": "text",
                 "tip": "",
                 "rule": {
@@ -76,6 +85,28 @@
                     "require": true
                 }
             }
-        }
+        },
+          "widgets": {
+            "last_articles": {
+                "title": "最新文章",
+                "display": "1",
+                "vars": {
+                    "last_articles_category_id": {
+                        "title": "文章分类ID",
+                        "value": "",
+                        "type": "text",
+                        "dataSource": {
+                            "api": "portal/category/index",
+                            "multi": true
+                        },
+                        "placeholder": "请选择分类",
+                        "tip": "",
+                        "rule": {
+                            "require": true
+                        }
+                    }
+                }
+            }
+          }
     }
 }

@@ -5,7 +5,24 @@
     "order": 10.0,
     "more": {
         "vars": {
-
+          "company_man": {
+              "title": "实验室负责人",
+              "value": "xxx",
+              "type": "text",
+              "tip": "",
+              "rule": {
+                  "require": true
+              }
+          },
+          "address_cn": {
+              "title": "公司地址",
+              "value": "桂林电子科技大学",
+              "type": "text",
+              "tip": "",
+              "rule": {
+                  "require": true
+              }
+          }
         },
         "widgets":{
             "hottest_articles": {
