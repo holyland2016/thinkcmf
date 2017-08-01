@@ -7,7 +7,7 @@
     <include file="public@head"/>
     <style>
         #context img {
-            height: auto !important;
+            height: 100px;
             max-width: 100%;
         }
 
@@ -126,7 +126,8 @@
 
     $(".dropdown").mouseleave(function(){
         $(this).removeClass("open");
-    })
+    });
+    $("img").addClass("img-responsive");
 })
 	</script>
 <hook name="before_body_end"/>
